@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer';
 import dotenv from "dotenv";
 dotenv.config();
 
-let URL = process.env.HOST
+let URL = process.env.HOST;
 
 const generarReporte = async (req, res) => {
   const { categoria, subcategoria, stock } = req.query;
@@ -48,15 +48,14 @@ const generarReporte = async (req, res) => {
           </thead>
           <tbody>
             ${productos.map(producto => `
-              
               <tr>
                 <td>${producto.name}</td>
                 <td>${producto.description}</td>
                 <td>${producto.brand}</td>
                 <td>${producto.price.toFixed(2)}</td>
                 <td>
-  ${producto.image ? `<img src="https://backendfusalmofinal-production.up.railway.app${producto.image}" alt="${producto.name}" width="50" height="50"/>` : 'No image'}
-</td>
+                  ${producto.image ? `<img src="https://backendfusalmofinal-production.up.railway.app${producto.image}" alt="${producto.name}" width="50" height="50"/>` : 'No image'}
+                </td>
                 <td>${producto.categoryId?.category}</td>
                 <td>${producto.subCategoryId?.subcategory}</td>
               </tr>
@@ -67,7 +66,12 @@ const generarReporte = async (req, res) => {
       </html>
     `;
     
-    const browser = await puppeteer.launch();
+    // Configurar Puppeteer para evitar el error de sandbox
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],  // Desactiva el sandbox
+      headless: true,  // Corre sin interfaz gráfica
+    });
+
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
     const pdfBuffer = await page.pdf({ format: 'A4' });
@@ -75,6 +79,7 @@ const generarReporte = async (req, res) => {
 
     const timestamp = new Date().toISOString().replace(/:/g, '-');
     const pdfFilename = `reporte-${timestamp}.pdf`;
+
     res.set({
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename=${pdfFilename}`,
@@ -83,7 +88,7 @@ const generarReporte = async (req, res) => {
     res.send(pdfBuffer);
   } catch (error) {
     console.error('Error al generar el reporte:', error);
-    res.status(500).json({ error: 'Error en el servidor' });
+    res.status(500).json({ error: 'Error en el servidor', details: error.message });
   }
 };
 
