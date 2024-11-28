@@ -13,13 +13,13 @@ import { validationMiddleware } from "../../middlewares/validationMiddleware.js"
 
 const inventoryRoutes = Router();
 
-inventoryRoutes.get("/inventories", verifyToken, GetInventories);
+inventoryRoutes.get("/inventories",  GetInventories);
 
-inventoryRoutes.get("/inventories/:id", verifyToken, GetInventory);
+inventoryRoutes.get("/inventories/:id",  GetInventory);
 
 inventoryRoutes.post(
   "/inventories",
-  verifyToken,
+  
   body("stock")
     .notEmpty()
     .isInt({ min: 1 })
@@ -38,7 +38,7 @@ inventoryRoutes.post(
 
 inventoryRoutes.put(
   "/inventories/:id",
-  verifyToken,
+  
   body("stock")
     .optional()
     .notEmpty()
@@ -58,6 +58,6 @@ inventoryRoutes.put(
   UpdateInventory
 );
 
-inventoryRoutes.delete("/inventories/:id", verifyToken, DeleteInventory);
+inventoryRoutes.delete("/inventories/:id", DeleteInventory);
 
 export default inventoryRoutes;

@@ -14,7 +14,7 @@ const categoryRouter = Router();
 
 categoryRouter.post(
   "/categories",
-  verifyToken,
+  
   body("category").notEmpty().isString(),
   body("description").notEmpty().isString(),
   validationMiddleware,
@@ -23,15 +23,15 @@ categoryRouter.post(
 
 categoryRouter.put(
   "/categories/:id",
-  verifyToken,
+  
   body("category").optional().isString(),
   body("description").optional().isString(),
   validationMiddleware,
   UpdateCategory
 );
 
-categoryRouter.get("/categories", verifyToken, GetCategories);
-categoryRouter.get("/categories/:id", verifyToken, GetCategory);
-categoryRouter.delete("/categories/:id", verifyToken, DeleteCategory);
+categoryRouter.get("/categories",  GetCategories);
+categoryRouter.get("/categories/:id", GetCategory);
+categoryRouter.delete("/categories/:id",  DeleteCategory);
 
 export default categoryRouter;

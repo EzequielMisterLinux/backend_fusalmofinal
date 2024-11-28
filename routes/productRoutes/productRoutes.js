@@ -19,11 +19,11 @@ import { validationMiddleware } from "../../middlewares/validationMiddleware.js"
 
 const productRouter = Router();
 
-productRouter.get("/products", verifyToken, GetProducts);
-productRouter.get("/products/:id", verifyToken, GetProduct);
+productRouter.get("/products",  GetProducts);
+productRouter.get("/products/:id",  GetProduct);
 productRouter.post(
   "/products",
-  verifyToken,
+  
   uploadImageProduct.single("image"),
   body("name")
     .notEmpty()
@@ -42,7 +42,7 @@ productRouter.post(
 );
 productRouter.put(
   "/products/:id",
-  verifyToken,
+ 
   body("description")
     .optional()
     .isString()
@@ -57,11 +57,11 @@ productRouter.put(
 );
 productRouter.put(
   "/products/upload/:id",
-  verifyToken,
+  
   uploadImageProduct.single("image"),
   UpdateImageProduct
 );
 
-productRouter.delete("/products/:id", verifyToken, DeleteProduct);
+productRouter.delete("/products/:id", DeleteProduct);
 
 export default productRouter;

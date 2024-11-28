@@ -28,25 +28,25 @@ dotenv.config();
 const routesUserAccess = express.Router();
 
 // Endpoint de registro
-routesUserAccess.post('/userregister', verifyToken, CreateNewUser);
+routesUserAccess.post('/userregister', CreateNewUser);
 
 //Endpoint para cerrar la sesión
 routesUserAccess.post('/logout',  UserLogoutController);
 
 // Endpoint para obtener un usuario por id
-routesUserAccess.get('/users/:id', verifyToken, GetUserById);
+routesUserAccess.get('/users/:id', GetUserById);
 
 // Endpoint para obtener todos los usuarios
-routesUserAccess.get('/users', verifyToken, GetUsers);
+routesUserAccess.get('/users', GetUsers);
 
 // Endpoint para actualizar el usuario por id
-routesUserAccess.put('/users/:id', verifyToken, UpdateUserById);
+routesUserAccess.put('/users/:id', UpdateUserById);
 
 // Endpoint para ingresar al sistema "LOGIN"
 routesUserAccess.post('/login', AccessLogin);
 
 // Endpoint para actualizar la contraseña
-routesUserAccess.put('/loginpassw', verifyToken, UpdatePassw);
+routesUserAccess.put('/loginpassw', UpdatePassw);
 
 // Endpoint para enviar email si el usuario ha olvidado la contraseña
 routesUserAccess.post('/send-reset-password-email', SendResetPasswordEmail);
@@ -55,10 +55,10 @@ routesUserAccess.post('/send-reset-password-email', SendResetPasswordEmail);
 routesUserAccess.post('/verify-reset-password-token', VerifyResetTokenAndUpdatePassword);
 
 //Endpoint para borrar un empleado
-routesUserAccess.delete('/users/:id', verifyToken, DeleteEmployee)
+routesUserAccess.delete('/users/:id', DeleteEmployee)
 
 // Endpoint de una ruta protegida
-routesUserAccess.get('/protected', verifyToken, (req, res) => {
+routesUserAccess.get('/protected', (req, res) => {
     res.send(`Hola ${req.user.username}, esta es una ruta protegida.`);
 });
 

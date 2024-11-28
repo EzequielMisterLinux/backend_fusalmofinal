@@ -55,7 +55,7 @@ const generarReporte = async (req, res) => {
                 <td>${producto.brand}</td>
                 <td>${producto.price.toFixed(2)}</td>
                 <td>
-  ${producto.image ? `<img src="http://localhost:3000${producto.image}" alt="${producto.name}" width="50" height="50"/>` : 'No image'}
+  ${producto.image ? `<img src="https://backendfusalmofinal-production.up.railway.app${producto.image}" alt="${producto.name}" width="50" height="50"/>` : 'No image'}
 </td>
                 <td>${producto.categoryId?.category}</td>
                 <td>${producto.subCategoryId?.subcategory}</td>

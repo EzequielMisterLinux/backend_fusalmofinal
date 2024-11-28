@@ -36,10 +36,10 @@ server.use(cors(corsOptions));
 
 // Rutas
 server.use("/api", routesUserAccess);
-server.use("/api", verifyToken, productRouter);
-server.use("/api", verifyToken, categoryRouter);
-server.use("/api", verifyToken, subcategoryRouter);
-server.use("/api", verifyToken, inventoryRouter);
+server.use("/api", productRouter);
+server.use("/api", categoryRouter);
+server.use("/api", subcategoryRouter);
+server.use("/api", inventoryRouter);
 
 // Middleware global para manejo de errores
 server.use(globalErrorMiddleware);

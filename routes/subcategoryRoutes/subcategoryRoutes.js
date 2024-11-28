@@ -11,7 +11,7 @@ const subcategoryRouter = Router();
 
 subcategoryRouter.post(
   '/subcategories',
-  verifyToken, 
+  
   body('subcategory').notEmpty().isString(), 
   body('description').notEmpty().isString(), 
   body('categoryId').notEmpty().isMongoId().custom(async (value) => {
@@ -25,7 +25,7 @@ subcategoryRouter.post(
 );
 
 subcategoryRouter.put('/subcategories/:id', 
-  verifyToken, 
+  
   body('subcategory').optional().isString(), 
   body('description').optional().isString(), 
   body('categoryId').optional().isMongoId().custom(async (value) => {
@@ -38,9 +38,9 @@ subcategoryRouter.put('/subcategories/:id',
   UpdateSubcategory
 );
 
-subcategoryRouter.put('/subcategories/:id', verifyToken, UpdateSubcategory);
-subcategoryRouter.get('/subcategories', verifyToken, GetSubcategories);
-subcategoryRouter.get('/subcategories/:id', verifyToken, GetSubcategory);
-subcategoryRouter.delete('/subcategories/:id', verifyToken, DeleteSubcategory);
+subcategoryRouter.put('/subcategories/:id',  UpdateSubcategory);
+subcategoryRouter.get('/subcategories',  GetSubcategories);
+subcategoryRouter.get('/subcategories/:id', GetSubcategory);
+subcategoryRouter.delete('/subcategories/:id', DeleteSubcategory);
 
 export default subcategoryRouter;
