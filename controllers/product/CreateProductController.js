@@ -45,7 +45,7 @@ export const CreateProduct = async (req, res) => {
       price,
       categoryId,
       subCategoryId,
-      image: "/uploads/${image}",
+      image: `/uploads/${image}`,
     });
 
     await newProduct.save();
