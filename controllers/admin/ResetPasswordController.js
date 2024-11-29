@@ -30,7 +30,7 @@ const SendResetPasswordEmail = async (req, res) => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
         await user.save();
 
-        const resetLink = `http://localhost:5173/reset-password/${token}`;
+        const resetLink = `https://absolutesystemfusalmoprojects.netlify.app/reset-password/${token}`;
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: user.mail,

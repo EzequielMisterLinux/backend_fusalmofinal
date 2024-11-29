@@ -10,7 +10,7 @@ dotenv.config();
 export const CreateProduct = async (req, res) => {
   const { name, description, brand, price, categoryId, subCategoryId } =
     req.body;
-  const { id } = req.user;
+ 
   const image = req.file.filename;
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -46,8 +46,6 @@ export const CreateProduct = async (req, res) => {
       categoryId,
       subCategoryId,
       image: "/uploads/${image}",
-      createdBy: id,
-      updatedBy: id,
     });
 
     await newProduct.save();

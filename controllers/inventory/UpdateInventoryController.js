@@ -4,7 +4,7 @@ import InventoryModel from "../../models/inventory/inventoryModel.js";
 export const UpdateInventory = async (req, res) => {
   const { stock, unitPrice, productId } = req.body;
   const { id } = req.params;
-  const user = req.user;
+  
   const populateQuery = [
     { path: "productId", select: "_id name description brand" },
   ];
@@ -33,7 +33,7 @@ export const UpdateInventory = async (req, res) => {
     inventory.stock = stock || inventory.stock;
     inventory.unitPrice = unitPrice || inventory.unitPrice;
     inventory.productId = productId || inventory.productId;
-    inventory.updatedBy = user.id;
+    
 
     await inventory.save();
 

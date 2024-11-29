@@ -4,7 +4,7 @@ import CategoryModel from "../../models/category/categoryModel.js";
 export const UpdateSubcategory = async (req, res) => {
   const { id } = req.params;
   const { subcategory, description, categoryId } = req.body;
-  const { id: userId } = req.user;
+
 
   try {
     const existingSubcategory = await SubcategoryModel.findOne({ _id: id, status: "ACTIVE" });
@@ -23,8 +23,7 @@ export const UpdateSubcategory = async (req, res) => {
     existingSubcategory.subcategory = subcategory || existingSubcategory.subcategory;
     existingSubcategory.description = description || existingSubcategory.description;
     existingSubcategory.category = categoryId || existingSubcategory.category;
-    existingSubcategory.updatedBy = userId;
-    existingSubcategory.updatedAt = Date.now();
+
 
     await existingSubcategory.save();
 

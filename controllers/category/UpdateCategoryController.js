@@ -3,7 +3,7 @@ import CategoryModel from "../../models/category/categoryModel.js";
 export const UpdateCategory = async (req, res) => {
   const { id } = req.params;
   const { category, description } = req.body;
-  const { id: userId } = req.user;
+  
 
   try {
     const existingCategory = await CategoryModel.findOne({ _id: id, status: "ACTIVE" });
@@ -14,8 +14,7 @@ export const UpdateCategory = async (req, res) => {
 
     existingCategory.category = category || existingCategory.category;
     existingCategory.description = description || existingCategory.description;
-    existingCategory.updatedBy = userId;
-    existingCategory.updatedAt = Date.now();
+
 
     await existingCategory.save();
 

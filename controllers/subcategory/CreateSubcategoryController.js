@@ -3,7 +3,7 @@ import CategoryModel from '../../models/category/categoryModel.js';
 
 export const CreateSubcategory = async (req, res) => {
   const { subcategory, description, categoryId } = req.body;
-  const { id } = req.user;
+ 
 
   try {
     const existingCategory = await CategoryModel.findById(categoryId);
@@ -24,8 +24,7 @@ export const CreateSubcategory = async (req, res) => {
       subcategory,
       description,
       category: categoryId,
-      createdBy: id,
-      updatedBy: id,
+
     });
 
     await newSubcategory.save();

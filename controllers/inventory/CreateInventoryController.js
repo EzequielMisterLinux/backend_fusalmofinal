@@ -3,7 +3,7 @@ import InventoryModel from "../../models/inventory/inventoryModel.js";
 
 export const CreateInventory = async (req, res) => {
   const { stock, productId, unitPrice } = req.body;
-  const { id } = req.user;
+
 
   try {
     const product = await ProductModel.findById(productId);
@@ -20,8 +20,7 @@ export const CreateInventory = async (req, res) => {
       stock,
       unitPrice,
       productId,
-      createdBy: id,
-      updatedBy: id,
+
     });
 
     await newInventory.save();

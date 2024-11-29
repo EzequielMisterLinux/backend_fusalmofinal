@@ -11,7 +11,7 @@ dotenv.config();
 export const UpdateProduct = async (req, res) => {
   const { description, brand, price, categoryId, subCategoryId } = req.body;
   const { id } = req.params;
-  const user = req.user;
+  
   try {
     const product = await ProductModel.findOne({ _id: id, status: "ACTIVE" });
     const category = await CategoryModel.findById(categoryId);
@@ -33,7 +33,7 @@ export const UpdateProduct = async (req, res) => {
     product.price = price || product.price;
     product.categoryId = categoryId || product.categoryId;
     product.subCategoryId = subCategoryId || product.subCategoryId;
-    product.updatedBy = user.id;
+    
 
     await product.save();
 

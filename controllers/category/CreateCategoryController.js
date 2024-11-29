@@ -4,7 +4,7 @@ dotenv.config();
 
 export const CreateCategory = async (req, res) => {
   const { category, description } = req.body;
-  const { id } = req.user;
+  
 
   if (!category || !description) {
     return res
@@ -21,8 +21,7 @@ export const CreateCategory = async (req, res) => {
     const newCategory = new CategoryModel({
       category,
       description,
-      createdBy: id,
-      updatedBy: id,
+
     });
 
     await newCategory.save();
